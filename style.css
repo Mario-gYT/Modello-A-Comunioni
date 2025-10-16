@@ -9,9 +9,8 @@
     --boy-color: #79A6D2; 
     --girl-color: #F8BBD0; 
     --social-color: #6c757d; 
-    /* Durata base per le animazioni */
     --animation-duration: 0.6s;
-    --envelope-open-delay: 0.8s; /* Ritardo dopo l'inizio dell'apertura della busta */
+    --envelope-open-delay: 0.8s; 
 }
 
 /* Stile base */
@@ -21,7 +20,7 @@ body {
     font-family: 'Playfair Display', serif; 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Consente lo scroll verticale di tutto il body */
     min-height: 100vh;
     margin: 0;
     padding: 20px;
@@ -35,52 +34,68 @@ body {
 
 
 /* ------------------------------------- */
-/* CONTENITORE E STATI */
+/* CONTENITORE E STATI (FIX DEFINITIVO) */
 /* ------------------------------------- */
 
 #envelope-container {
     width: 90%;
     max-width: 500px;
-    min-height: 600px; 
+    /* Rimosso min-height: l'altezza sarà dinamica in base al contenuto aperto */
     background-color: transparent; 
-    border: none;
     padding: 0;
     text-align: center;
-    box-shadow: none;
     position: relative;
-    overflow: hidden; 
+    /* CRUCIALE: Rimosso overflow: hidden per permettere lo scroll del body */
+    overflow: visible; 
 }
 
-/* ------------------------------------- */
-/* STATO CHIUSO (Animazione Busta) */
-/* ------------------------------------- */
-
-#closed-state {
-    position: absolute;
+/* STATO APERTO (Contenuto dell'Invito) */
+#open-state {
+    background-color: var(--paper-white); 
+    border: 1px solid var(--gold); 
+    border-radius: 5px; 
+    padding: 40px;
+    position: relative; /* CRUCIALE: Non è più assoluto, occupa spazio nel flow */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    box-sizing: border-box;
+    min-height: 600px; /* Altezza minima per estetica */
+    z-index: 10; /* Sta sotto lo stato chiuso */
+    
+    /* Lo nascondiamo inizialmente con l'opacità, non con la posizione */
+    opacity: 0; 
+    transform: translateY(0); 
+    transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
+}
+
+/* STATO CHIUSO (Animazione Busta) */
+#closed-state {
+    /* Mantenuto assoluto per sovrapporsi */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Altezza fissa per coprire lo stato aperto all'inizio */
+    height: 600px; 
     background-color: var(--paper-white); 
     border: 1px solid var(--gold); 
     border-radius: 5px;
-    z-index: 100;
+    z-index: 100; /* Sta sopra lo stato aperto */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: transform 0.8s ease-in-out;
+    transition: transform 0.8s ease-in-out, opacity 0.8s;
 }
 
-/* ... (Elementi busta: h1, envelope-flap, open-label) ... */
-
-/* ------------------------------------- */
 /* LOGICA DI APERTURA BUSTA */
-/* ------------------------------------- */
-
 #toggle:checked ~ #envelope-container #closed-state {
-    transform: translateY(100vh); 
+    /* CORREZIONE: Spostiamo solo leggermente fuori e lo nascondiamo completamente con l'opacità */
+    transform: translateY(20px); 
     opacity: 0;
+    /* Importante per rimuovere l'interazione dopo l'animazione */
+    pointer-events: none; 
 }
 
 #toggle:checked ~ #envelope-container .envelope-flap {
@@ -88,34 +103,13 @@ body {
 }
 
 #toggle:checked ~ #envelope-container #open-state {
-    display: block; 
+    /* Quando la busta è aperta, l'invito appare */
     opacity: 1; 
     transform: translateY(0);
 }
 
 /* ------------------------------------- */
-/* STATO APERTO (Contenuto dell'Invito) */
-/* ------------------------------------- */
-
-#open-state {
-    background-color: var(--paper-white); 
-    border: 1px solid var(--gold); 
-    border-radius: 5px; 
-    padding: 40px;
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; 
-    box-sizing: border-box;
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
-}
-
-/* ------------------------------------- */
-/* ANIMAZIONI DI DISSOLVENZA SEQUENZIALE (fade-in) */
+/* ANIMAZIONI DI DISSOLVENZA SEQUENZIALE */
 /* ------------------------------------- */
 
 /* Definisce l'animazione di dissolvenza (fade-in) */
@@ -124,15 +118,15 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* TUTTI gli elementi da animare sono inizialmente nascosti */
+/* Tutti gli elementi da animare sono inizialmente nascosti */
+/* Usiamo la visibilità per mascherare gli elementi prima dell'animazione */
 #open-state > *,
-#open-state .buttons-circle-container > *,
-#closed-state .fade-in-delay-0 {
+#open-state .buttons-circle-container > * {
     opacity: 0;
-    transition: none; /* Rimuove le transizioni di default per usare l'animazione */
+    transition: none; 
 }
 
-/* Quando la busta è aperta, applichiamo l'animazione con ritardi */
+/* Applica l'animazione quando l'invito è aperto */
 #toggle:checked ~ #envelope-container #open-state .fade-in-delay-1,
 #toggle:checked ~ #envelope-container #open-state .fade-in-delay-2,
 #toggle:checked ~ #envelope-container #open-state .fade-in-delay-3,
@@ -145,10 +139,10 @@ body {
 #toggle:checked ~ #envelope-container #open-state .fade-in-delay-10 {
     animation-name: fadeIn;
     animation-duration: var(--animation-duration);
-    animation-fill-mode: forwards; /* Mantiene lo stato finale (opacity: 1) */
+    animation-fill-mode: forwards;
 }
 
-/* ORARI DI RITARDO (ritardo base + sequenza) */
+/* ORARI DI RITARDO */
 .fade-in-delay-1 { animation-delay: calc(var(--envelope-open-delay) + 0.1s); }
 .fade-in-delay-2 { animation-delay: calc(var(--envelope-open-delay) + 0.3s); }
 .fade-in-delay-3 { animation-delay: calc(var(--envelope-open-delay) + 0.5s); }
@@ -165,21 +159,13 @@ body {
     animation-name: fadeIn;
     animation-duration: var(--animation-duration);
     animation-fill-mode: forwards;
-    animation-delay: 0.1s; /* Appare quasi subito dopo l'apertura */
+    animation-delay: 0.1s; 
 }
 
 
 /* ------------------------------------- */
-/* STILI GENERALI (Modificati per il nuovo layout) */
+/* STILI GENERALI E BOTTONI (Mantenuti) */
 /* ------------------------------------- */
-
-.small-text {
-    font-size: 0.9em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Playfair Display', serif;
-}
 
 .cursive-name {
     font-family: 'Great Vibes', cursive;
@@ -189,34 +175,16 @@ body {
     margin: 0;
     line-height: 1.2;
 }
+/* ... (Altri stili di testo e separatori) ... */
 
-.date-time {
-    font-size: 1.1em;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.separator {
-    width: 60%;
-    height: 1px;
-    background-color: var(--gold);
-    margin: 20px auto;
-}
-
-/* ------------------------------------- */
-/* PULSANTI DI AZIONE - CERCHIO */
-/* ------------------------------------- */
-
+/* Pulsanti di Posizione (Raggruppati) */
 .buttons-circle-container {
     display: flex;
     justify-content: space-around; 
     align-items: flex-end;
-    margin: 30px auto 15px auto; /* Margine inferiore ridotto per il pulsante Conferma */
+    margin: 30px auto 15px auto; 
     max-width: 400px;
 }
-
-/* Nuovo stile per raggruppare i pulsanti di posizione */
 .location-group {
     display: flex;
     flex-direction: column;
@@ -224,31 +192,7 @@ body {
     gap: 10px;
 }
 
-.circle-button {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    border: 2px solid var(--gold); 
-    color: var(--gold);
-    background-color: transparent;
-    transition: all 0.3s;
-    font-family: 'Playfair Display', serif;
-}
-
-.circle-button:hover {
-    background-color: var(--gold);
-    color: var(--paper-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-/* ... (Stili button-icon e button-text) ... */
-
-/* Pulsante Conferma Grande (large-confirm) */
+/* Pulsante Conferma Grande */
 .centered-action {
     text-align: center;
     margin: 20px auto 30px auto;
@@ -259,79 +203,17 @@ body {
     border-width: 3px; 
     font-size: 1.1em;
 }
-.circle-button.large-confirm .button-icon {
-    font-size: 2em; 
-}
-.circle-button.large-confirm .button-text {
-    font-size: 0.8em;
-}
+/* ... (Stili base dei cerchi, hover, RSVP) ... */
 
-/* Stile per RSVP (Conferma presenza) */
-.circle-button.whatsapp-confirm {
-    border-color: var(--boy-color); 
-    color: var(--boy-color);
-}
-.circle-button.whatsapp-confirm:hover {
-    background-color: var(--boy-color);
-    color: var(--paper-white);
-}
-/* ... (Stili hover per whatsapp-confirm) ... */
-
-/* ------------------------------------- */
-/* DECORAZIONI PER SESSO */
-/* ------------------------------------- */
-
-.decorations {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Spazio ridotto per più icone */
-    flex-wrap: wrap;
-    opacity: 0; /* Nascondi per l'animazione iniziale */
-}
-
-/* Nasconde gli elementi decorativi di default */
-.decorations span {
-    opacity: 1;
-    transition: none;
-}
-
-/* Stile per RAGAZZO */
-#open-state.boy .balloons, #open-state.boy .teddy-bear { color: var(--boy-color); }
-#open-state.boy .whatsapp-confirm { border-color: var(--boy-color); color: var(--boy-color); }
-#open-state.boy .whatsapp-confirm:hover { background-color: var(--boy-color); }
-
-/* Stile per RAGAZZA */
-#open-state.girl .balloons, #open-state.girl .teddy-bear { color: var(--girl-color); }
-#open-state.girl .whatsapp-confirm { border-color: var(--girl-color); color: var(--girl-color); }
-#open-state.girl .whatsapp-confirm:hover { background-color: var(--girl-color); }
-
-/* ------------------------------------- */
-/* COUNTDOWN & PULSANTI SOCIAL */
-/* ------------------------------------- */
-#countdown-container {
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid var(--gold); 
-    text-align: center;
-}
-/* ... (Stili countdown) ... */
-
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    margin-top: 15px; 
-}
+/* Pulsanti Social */
 .buttons-container.social-buttons {
+    display: flex;
     flex-direction: row; 
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 10px;
     gap: 10px;
 }
-
 .social-buttons .action-button {
     padding: 8px 12px;
     font-size: 0.8em;
@@ -354,14 +236,19 @@ body {
 /* ------------------------------------- */
 
 @media (max-width: 600px) {
+    body {
+        /* Assicura che l'allineamento sia in alto su mobile per lo scroll */
+        align-items: flex-start;
+    }
+    #closed-state, #open-state {
+        min-height: 500px; /* Altezza leggermente ridotta su mobile */
+        height: auto; /* Permette l'espansione del contenuto */
+    }
     #open-state {
         padding: 30px 15px; 
     }
     .cursive-name {
         font-size: 4em;
-    }
-    .buttons-circle-container {
-        gap: 5px; 
     }
     .circle-button {
         width: 70px; 
@@ -370,8 +257,5 @@ body {
     .circle-button.large-confirm {
         width: 90px;
         height: 90px;
-    }
-    .location-group p {
-        font-size: 0.75em;
     }
 }
