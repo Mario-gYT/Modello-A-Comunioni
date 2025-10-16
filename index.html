@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battesimo di [Nome]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <input type="checkbox" id="toggle">
+
+    <div id="envelope-container">
+
+        <div id="closed-state">
+            <h1 class="black-text">Sei invitato al mio battesimo</h1>
+            <label for="toggle" class="gold-button envelope-flap"></label> 
+            <label for="toggle" class="open-label">Clicca per aprire</label> 
+        </div>
+        
+        <div id="open-state" class="girl"> <div id="card">
+                
+                <h1 class="main-title cursive-name black-text animated-item delay-1">Nome</h1>
+                
+                <p class="details black-text date-time animated-item delay-2">Il giorno: ../../.... alle ore ..:..</p>
+                
+                <div class="separator animated-item delay-2"></div>
+
+                <div class="buttons-circle-group">
+                    
+                    <div class="location-group animated-item delay-3">
+                        <p class="small-text gold-text location-text">Presso la chiesa</p>
+                        <a href="https://www.google.com/maps/dir//Via+Romani,+80,+80048+Sant'Anastasia+NA/@40.8745048,14.3044967,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x133baf33951368fd:0x2dd9632f87550327!2m2!1d14.3868975!2d40.8745341?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="circle-button church-map" title="Posizione Chiesa">
+                            <span class="button-icon">⛪</span>
+                            <span class="button-text">Chiesa</span>
+                        </a>
+                    </div>
+                    
+                    <div class="location-group animated-item delay-4">
+                        <p class="small-text gold-text location-text">Ristorante</p>
+                        <a href="http://googleusercontent.com/maps.google.com/2" target="_blank" class="circle-button restaurant-map" title="Posizione Ristorante">
+                            <span class="button-icon">🍽️</span>
+                            <span class="button-text">Rist.</span>
+                        </a>
+                    </div>
+
+                    <a href="https://wa.me/39NUMERODEIGENITORI?text=Confermo%20la%20mia%20presenza%20al%20Battesimo%20di%20[Nome]" target="_blank" class="circle-button whatsapp-confirm animated-item delay-5" title="Conferma Presenza">
+                        <span class="button-icon">✅</span>
+                        <span class="button-text">Conferma</span>
+                    </a>
+                </div>
+                
+                <div id="countdown-container" class="animated-item delay-6">
+                    <p class="details black-text" style="margin-bottom: 5px;">Manca poco!</p>
+                    <div id="countdown" class="gold-text">Caricamento...</div>
+                </div>
+
+                <p class="details black-text animated-item delay-7" style="margin-top: 30px;">I miei social:</p>
+                <div class="buttons-circle-container social-actions animated-item delay-8">
+                    
+                    <a href="https://www.instagram.com/_mariogyt_/" target="_blank" class="circle-button social-button" title="Instagram">
+                        <span class="button-icon">📸</span>
+                        <span class="button-text">Instagram</span>
+                    </a> 
+                    <a href="https://www.youtube.com/@MariogYT." target="_blank" class="circle-button social-button" title="Youtube">
+                        <span class="button-icon">▶️</span>
+                        <span class="button-text">Youtube</span>
+                    </a>
+                </div>
+
+            </div>
+            
+            <div class="decorations">
+                <span class="teddy-bear large">🧸</span>
+                <span class="balloons large">🎈</span>
+            </div>
+            
+        </div>
+
+    </div>
+    
+    <script src="countdown.js"></script>
+
+</body>
+</html>
