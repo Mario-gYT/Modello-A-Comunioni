@@ -1,246 +1,221 @@
-/* Importazione Font Google */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900;1,700&family=Great+Vibes&display=swap');
+/* Importazione Font Google per Playfair Display e Great Vibes (Corsivo) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap');
+
+
+/* Stile base */
+body {
+    /* Manteniamo lo sfondo nero per l'esterno del contenitore */
+    background-color: #000; 
+    color: #333; 
+    font-family: 'Playfair Display', serif; /* Font predefinito */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
 /* Variabili Colori */
 :root {
     --gold: #A68E5D; /* Oro elegante */
     --black-text: #222222; 
-    --paper-white: #FDFDFD; 
-    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione */
-    --social-color: #6c757d; 
+    --paper-white: #FDFDFD; /* Bianco crema per lo sfondo dell'invito */
+    
+    /* Colori Sesso */
+    --boy-color: #79A6D2; /* Azzurro tenue */
+    --girl-color: #F8BBD0; /* Rosa tenue */
 }
 
-/* Stile base (Centraggio e Sfondo) */
-body {
-    background-color: #000; 
-    color: #333; 
-    font-family: 'Playfair Display', serif; 
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-x: hidden; 
+.gold-text {
+    color: var(--gold);
 }
-
-.gold-text { color: var(--gold); }
-.black-text { color: var(--black-text); }
-
-/* ------------------------------------- */
-/* CONTENITORE UNICO (Apertura Immediata) */
-/* ------------------------------------- */
-
-#open-state {
-    width: 90%;
-    max-width: 500px;
-    background-color: var(--paper-white); 
-    border: 3px solid var(--gold); /* Bordo robusto e dorato */
-    border-radius: 5px; 
-    padding: 40px;
-    text-align: center;
-    position: relative; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-    opacity: 1;
-}
-
-/* ------------------------------------- */
-/* CORNICE DI ROSE E NOME */
-/* ------------------------------------- */
-.name-frame-container {
-    margin: 20px auto 10px auto;
-}
-
-.rose-border {
-    font-size: 0.9em;
-    color: var(--accent-color); /* Colore delle rose */
-    margin: 0 0 5px 0;
-    line-height: 1.2;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-}
-
-.main-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 5.5em; 
-    font-weight: 400;
-    margin: 0;
-    line-height: 1.2;
+.black-text {
     color: var(--black-text);
 }
 
-/* ------------------------------------- */
-/* DECORAZIONI COMUNIONE */
-/* ------------------------------------- */
-.decorations { 
-    font-size: 2.5em; 
-    margin-bottom: 20px; 
-    display: flex; 
-    justify-content: center; 
-    gap: 15px; 
-    flex-wrap: wrap; 
-}
 
-.cross { color: var(--gold); }
-.rose { color: var(--accent-color); }
-
-
-/* ------------------------------------- */
-/* STILI GENERALI E TESTO */
-/* ------------------------------------- */
-
-.small-text { 
-    font-size: 0.9em; 
-    text-transform: uppercase; 
-    letter-spacing: 2px; 
-    margin-bottom: 5px; 
-}
-
-.date-time { 
-    font-size: 1.1em; 
-    margin-top: 20px; 
-    margin-bottom: 20px; 
-    letter-spacing: 1px; 
-    color: var(--gold); /* Colore dorato per data/ora */
-}
-
-.separator { 
-    width: 60%; 
-    height: 1px; 
-    background-color: var(--gold); 
-    margin: 20px auto; 
-}
-.centered-action { text-align: center; }
-
-
-/* ------------------------------------- */
-/* PULSANTI A BLOCCO (QUADRATI/RETTANGOLI) */
-/* ------------------------------------- */
-
-.buttons-block-container {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Spazio tra i pulsanti/blocchi */
+/* Nasconde il checkbox */
+#toggle {
+    display: none;
 }
 
 /* ------------------------------------- */
-/* REGOLE DI AFFIANCAMENTO PER I PULSANTI MAPPA (NUOVE) */
+/* STATO CHIUSO (Busta Iniziale) */
 /* ------------------------------------- */
 
-.location-duo {
-    display: flex;
-    justify-content: space-between; /* Spazia i due blocchi */
-    gap: 15px; /* Spazio tra Chiesa e Ristorante */
-    width: 100%;
 }
 
-.location-group-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%; /* Ognuno occupa metà spazio */
-    box-sizing: border-box;
+/* ------------------------------------- */
+/* STATO APERTO (Contenuto dell'Invito) */
+/* ------------------------------------- */
+#open-state {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
 }
 
-.location-header {
-    margin: 15px 0 5px 0; /* Spazio sopra l'intestazione */
-    font-weight: 600;
-    color: var(--gold); 
-    text-transform: uppercase;
+.small-text {
     font-size: 0.9em;
-}
-
-/* Stili per i pulsanti */
-.action-button.block-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px; /* Angoli leggermente arrotondati */
-    font-size: 1em;
-    font-weight: 600;
-    transition: all 0.3s;
-    /* ! La larghezza viene gestita dai contenitori per l'affiancamento ! */
-    width: 100%; 
-    box-sizing: border-box;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     font-family: 'Playfair Display', serif;
 }
 
-/* Stile per i pulsanti di Mappa (Chiesa/Ristorante) */
-.primary-button {
-    border: 2px solid var(--gold);
-    background-color: transparent;
-    color: var(--gold);
+.main-title {
+    color: var(--black-text);
+    font-size: 4em; 
+    margin: 10px 0;
+    line-height: 1.1;
+    font-family: 'Playfair Display', serif; 
+    font-weight: 700;
 }
-.primary-button:hover {
+
+.cursive-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5em;
+    font-weight: 400;
+    color: var(--black-text);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.date-time {
+    font-size: 1.1em;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.details {
+    margin-top: 20px;
+    margin-bottom: 10px; /* Aggiunto piccolo margine sotto i dettagli */
+}
+
+.separator {
+    width: 60%;
+    height: 1px;
+    background-color: var(--gold);
+    margin: 30px auto;
+}
+
+/* LOGICA DI APERTURA CSS (Mantenuta Invariata) */
+#toggle:checked ~ #envelope-container #closed-state {
+    display: none; 
+    opacity: 0;
+}
+
+#toggle:checked ~ #envelope-container #open-state {
+    display: block; 
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+/* ------------------------------------- */
+/* STILE PULSANTI DI AZIONE - TONDI */
+/* ------------------------------------- */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-top: 15px; /* Rimosso grande margine, gestito dai testi 'details' */
+}
+
+/* Allinea i pulsanti social uno accanto all'altro */
+.buttons-container.social-buttons {
+    flex-direction: row; /* Modifica da colonna a riga */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Riduce il padding per i pulsanti social più piccoli */
+.social-buttons .action-button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+}
+
+
+.action-button {
+    text-decoration: none;
+    color: var(--gold);
+    background-color: transparent; 
+    padding: 12px 25px; 
+    border-radius: 50px; 
+    font-weight: normal;
+    text-transform: none; 
+    transition: all 0.3s;
+    border: 2px solid var(--gold); 
+    font-family: 'Playfair Display', serif;
+    display: inline-block;
+}
+
+.action-button.whatsapp {
+    color: var(--paper-white); 
+    background-color: var(--gold);
+    border: 2px solid var(--gold); 
+}
+
+.action-button:hover {
     background-color: var(--gold);
     color: var(--paper-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px); 
 }
 
-/* Stile per il pulsante CONFERMA (In evidenza) */
-.confirm-button {
-    border: 2px solid var(--accent-color);
-    background-color: var(--accent-color);
-    color: var(--paper-white);
-    padding: 15px 20px; /* Più grande */
-    font-size: 1.1em;
-}
-.confirm-button:hover {
-    background-color: transparent;
-    color: var(--accent-color);
-    border-color: var(--accent-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.button-icon {
-    margin-right: 8px;
-    font-size: 1.2em;
+.action-button.whatsapp:hover {
+    background-color: var(--black-text);
+    color: var(--gold);
+    border-color: var(--black-text); 
 }
 
 /* ------------------------------------- */
-/* PULSANTI SOCIAL (Mantenuti a riga) */
+/* DECORAZIONI PER SESSO (Modello A Battesimo) */
 /* ------------------------------------- */
 
-.buttons-container.social-buttons { 
-    display: flex; 
-    flex-direction: row; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-    margin-top: 10px; 
-    gap: 10px; 
-}
-.social-buttons .action-button {
-    padding: 8px 12px;
-    font-size: 0.8em;
-    border-radius: 5px; 
-    border: 1px solid var(--social-color); 
-    color: var(--social-color);
-    background-color: transparent;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap; 
-}
-.social-buttons .action-button:hover {
-    background-color: var(--social-color);
-    color: var(--paper-white);
+.decorations {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-/* ------------------------------------- */
-/* MEDIA QUERY */
-/* ------------------------------------- */
+/* Nasconde gli elementi decorativi di default */
+.teddy-bear, .balloons {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
 
+/* Stile per RAGAZZO */
+#open-state.boy .balloons {
+    opacity: 1;
+    color: var(--boy-color);
+}
+#open-state.boy .teddy-bear {
+    opacity: 1;
+    color: var(--boy-color);
+}
+/* Stile per RAGAZZA */
+#open-state.girl .balloons {
+    opacity: 1;
+    color: var(--girl-color);
+}
+#open-state.girl .teddy-bear {
+    opacity: 1;
+    color: var(--girl-color);
+}
+
+/* Ottimizzazione per mobile */
 @media (max-width: 600px) {
-    #open-state { padding: 30px 15px; }
-    .main-title { font-size: 4.5em; }
-    .rose-border { font-size: 0.8em; }
-    /* Aumentiamo il gap sui dispositivi piccoli per evitare che i pulsanti si tocchino */
-    .location-duo { gap: 10px; }
-    .action-button.block-button { padding: 10px 15px; font-size: 0.9em; }
-    .confirm-button { padding: 13px 18px; font-size: 1em; }
+    #envelope-container {
+        padding: 20px;
+    }
+    .main-title {
+        font-size: 3em;
+    }
+    .cursive-name {
+        font-size: 4em;
+    }
 }
