@@ -1,12 +1,12 @@
 /* Importazione Font Google */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900;1,700&family=Great+Vibes&display=swap');
 
-/* Variabili Colori (Adattate per Comunione) */
+/* Variabili Colori */
 :root {
     --gold: #A68E5D; /* Oro elegante */
     --black-text: #222222; 
     --paper-white: #FDFDFD; 
-    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione (per le rose/conferma) */
+    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione */
     --social-color: #6c757d; 
 }
 
@@ -17,7 +17,6 @@ body {
     font-family: 'Playfair Display', serif; 
     display: flex;
     justify-content: center;
-    /* align-items: flex-start; permette lo scroll se l'invito è lungo */
     align-items: center; 
     min-height: 100vh;
     margin: 0;
@@ -43,12 +42,11 @@ body {
     text-align: center;
     position: relative; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-    /* Tutte le regole di nascondimento/transizione sono state rimosse */
     opacity: 1;
 }
 
 /* ------------------------------------- */
-/* CORNICE DI ROSE E NOME (NUOVA STRUTTURA) */
+/* CORNICE DI ROSE E NOME */
 /* ------------------------------------- */
 .name-frame-container {
     margin: 20px auto 10px auto;
@@ -124,17 +122,37 @@ body {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Spazio tra i pulsanti */
+    gap: 10px; /* Spazio tra i pulsanti/blocchi */
+}
+
+/* ------------------------------------- */
+/* REGOLE DI AFFIANCAMENTO PER I PULSANTI MAPPA (NUOVE) */
+/* ------------------------------------- */
+
+.location-duo {
+    display: flex;
+    justify-content: space-between; /* Spazia i due blocchi */
+    gap: 15px; /* Spazio tra Chiesa e Ristorante */
+    width: 100%;
+}
+
+.location-group-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%; /* Ognuno occupa metà spazio */
+    box-sizing: border-box;
 }
 
 .location-header {
-    margin: 15px 0 5px 0; 
+    margin: 15px 0 5px 0; /* Spazio sopra l'intestazione */
     font-weight: 600;
-    color: var(--gold); /* Intestazione dorata */
+    color: var(--gold); 
     text-transform: uppercase;
     font-size: 0.9em;
 }
 
+/* Stili per i pulsanti */
 .action-button.block-button {
     display: flex;
     justify-content: center;
@@ -145,7 +163,8 @@ body {
     font-size: 1em;
     font-weight: 600;
     transition: all 0.3s;
-    width: 100%;
+    /* ! La larghezza viene gestita dai contenitori per l'affiancamento ! */
+    width: 100%; 
     box-sizing: border-box;
     font-family: 'Playfair Display', serif;
 }
@@ -220,6 +239,8 @@ body {
     #open-state { padding: 30px 15px; }
     .main-title { font-size: 4.5em; }
     .rose-border { font-size: 0.8em; }
+    /* Aumentiamo il gap sui dispositivi piccoli per evitare che i pulsanti si tocchino */
+    .location-duo { gap: 10px; }
     .action-button.block-button { padding: 10px 15px; font-size: 0.9em; }
     .confirm-button { padding: 13px 18px; font-size: 1em; }
 }
