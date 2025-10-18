@@ -3,74 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battesimo di [Nome]</title>
+    <title>Prima Comunione di [Nome]</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-comunione-A.css"> 
 </head>
 <body>
 
-    <input type="checkbox" id="toggle">
-
-    <div id="envelope-container">
-
-        <div id="closed-state">
-            <h1 class="black-text">Invito al Battesimo</h1>
-            <label for="toggle" class="gold-button envelope-flap"></label> 
-            <label for="toggle" class="open-label">Clicca per aprire</label> 
+    <div id="open-state">
+        
+        <div class="decorations">
+            <span class="rose">🌹</span>
+            <span class="cross">🕊️</span>
+            <span class="cross">✝️</span>
+            <span class="rose">🌹</span>
         </div>
         
-        <div id="open-state" class="girl"> <p class="small-text gold-text">Questo invito è per te, al mio battesimo</p>
-            
-            <div class="decorations">
-                <span class="teddy-bear">🧸</span>
-                <span class="balloons">🎈</span>
-            </div>
-            
-            <h1 class="main-title cursive-name black-text">Nome</h1>
-            
-            <p class="details black-text date-time">Il giorno: 28 / 06 / 2026 alle ore 11:00</p>
-            
-            <div class="separator"></div>
+        <h1 class="main-title cursive-name black-text">NOME</h1>
+        
+        <p class="small-text gold-text" style="margin-top: 5px;">La mia Prima Comunione</p>
+        
+        <div class="separator thin"></div>
 
-            <p class="small-text gold-text">Dove e Quando</p>
-            
-            <div class="buttons-circle-container">
-                
-                <a href="https://www.google.com/maps/dir//Via+Romani,+80,+80048+Sant'Anastasia+NA/@40.8745048,14.3044967,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x133baf33951368fd:0x2dd9632f87550327!2m2!1d14.3868975!2d40.8745341?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="circle-button church-map" title="Posizione Chiesa">
+        <p class="details black-text date-time">28 Maggio 2028 | Ore 11:30</p>
+        
+        <div class="buttons-circle-container main-actions">
+            <div class="location-group">
+                <p class="small-text gold-text" style="margin: 0;">Presso la Chiesa</p>
+                <a href="http://googleusercontent.com/maps.google.com/chiesa" target="_blank" class="circle-button church-map" title="Posizione Chiesa">
                     <span class="button-icon">⛪</span>
                     <span class="button-text">Chiesa</span>
                 </a>
-                
-                <a href="http://googleusercontent.com/maps.google.com/2" target="_blank" class="circle-button restaurant-map" title="Posizione Ristorante">
+            </div>
+            
+            <div class="location-group">
+                <p class="small-text gold-text" style="margin: 0;">Ristorante</p>
+                <a href="http://googleusercontent.com/maps.google.com/ristorante" target="_blank" class="circle-button restaurant-map" title="Posizione Ristorante">
                     <span class="button-icon">🍽️</span>
                     <span class="button-text">Rist.</span>
                 </a>
-                
-                <a href="https://wa.me/39NUMERODEIGENITORI?text=Confermo%20la%20mia%20presenza%20al%20Battesimo%20di%20[Nome]" target="_blank" class="circle-button whatsapp-confirm" title="Conferma Presenza">
-                    <span class="button-icon">✅</span>
-                    <span class="button-text">conferma</span>
-                </a>
             </div>
-
-            <div id="countdown-container">
-                <div id="countdown" class="gold-text">Caricamento...</div>
-            </div>
-
-            <p class="details black-text" style="margin-top: 25px;">Invito creato da:</p>
-            <div class="buttons-container social-buttons">
-                <a href="https://www.instagram.com/_mariogyt_/" target="_blank" class="action-button">
-                    Mario G.: Instagram
-                </a> 
-                <a href="https://www.youtube.com/@MariogYT." target="_blank" class="action-button">
-                    Mario G.: Youtube
-                </a>
-            </div>
-            
         </div>
 
+        <div class="centered-action">
+             <a href="https://wa.me/39NUMERODEIGENITORI?text=Confermo%20la%20mia%20presenza%20alla%20Comunione%20di%20[Nome]" target="_blank" class="circle-button whatsapp-confirm large-confirm" title="Conferma Presenza">
+                <span class="button-icon">✅</span>
+                <span class="button-text">Conferma</span>
+            </a>
+        </div>
+        
+        <div class="separator" style="margin-top: 30px;"></div>
+        <p class="details black-text" style="margin-top: 15px;">Seguimi sui social:</p>
+        <div class="buttons-container social-buttons">
+            <a href="https://www.instagram.com/_mariogyt_/" target="_blank" class="action-button">
+                Mario G.:Instagram
+            </a> 
+            <a href="https://www.youtube.com/@MariogYT." target="_blank" class="action-button">
+                Mario G.: Yuotube
+            </a>
+        </div>
+        
     </div>
     
-    <script src="countdown.js"></script>
-
-</body>
+    </body>
 </html>
