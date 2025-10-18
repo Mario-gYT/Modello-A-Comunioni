@@ -1,16 +1,13 @@
 /* Importazione Font Google */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap');
 
-/* Variabili Colori */
+/* Variabili Colori (Adattate per un tono più neutro/elegante se necessario) */
 :root {
     --gold: #A68E5D; 
     --black-text: #222222; 
     --paper-white: #FDFDFD; 
-    --boy-color: #79A6D2; 
-    --girl-color: #F8BBD0; 
+    --accent-color: #9b59b6; /* Un viola/rosa tenue per l'accento */
     --social-color: #6c757d; 
-    --animation-duration: 0.6s;
-    --envelope-open-delay: 0.8s; 
 }
 
 /* Stile base */
@@ -30,313 +27,81 @@ body {
 
 .gold-text { color: var(--gold); }
 .black-text { color: var(--black-text); }
-#toggle { display: none; }
 
 
 /* ------------------------------------- */
-/* CONTENITORE E STATI (FIX) */
+/* CONTENITORE PRINCIPALE (#open-state) */
 /* ------------------------------------- */
 
-#envelope-container {
+#open-state {
     width: 90%;
     max-width: 500px;
-    background-color: transparent; 
-    padding: 0;
-    text-align: center;
-    position: relative;
-    overflow: visible; 
-}
-
-/* STATO APERTO (Contenuto dell'Invito) */
-#open-state {
     background-color: var(--paper-white); 
-    border: 1px solid var(--gold); 
+    border: 3px solid var(--gold); 
     border-radius: 5px; 
     padding: 40px;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 600px; 
-    z-index: 10; 
-    
-    opacity: 0; 
-    transform: translateY(0); 
-    transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
-}
-
-/* STATO CHIUSO (Animazione Busta) */
-#closed-state {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 600px; 
-    background-color: var(--paper-white); 
-    /* CRUCIALE: Metti un bordo dorato anche sul corpo della busta per definirla */
-    border: 3px solid var(--gold); 
-    border-radius: 5px;
-    z-index: 100; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.8s ease-in-out, opacity 0.8s;
-}
-
-#closed-state h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 103;
-}
-
-/* La Finta Busta (il lembo) */
-.envelope-flap {
-    position: absolute;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    /* Adatta questi valori per la dimensione del contenitore (max-width: 500px -> metà è 250px) */
-    border-width: 150px 250px 0 250px; 
-    /* CORREZIONE: Aggiungi un bordo visibile al lembo per farlo sembrare parte della busta */
-    border-color: var(--gold) transparent transparent transparent; 
-    background-color: #f0f0f0; /* Un colore leggermente diverso per staccare dal corpo */
-    z-index: 102;
-    cursor: pointer;
-    transition: transform 0.8s, border-width 0.8s;
-}
-
-.open-label {
-    position: absolute;
-    bottom: 10%;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 8px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    /* CRUCIALE: Aumentato z-index per assicurare che sia sopra tutto */
-    z-index: 105; 
-    transition: opacity 0.3s;
-}
-
-/* ------------------------------------- */
-/* LOGICA DI APERTURA BUSTA */
-/* ------------------------------------- */
-
-#toggle:checked ~ #envelope-container #closed-state {
-    transform: translateY(20px); 
-    opacity: 0;
-    pointer-events: none; 
-}
-
-#toggle:checked ~ #envelope-container .envelope-flap {
-    /* Ora il lembo ruoterà e non si vedrà più il colore gold del bordo, ma il colore del lembo ruotato */
-    transform: rotateX(180deg) translateY(-100%);
-}
-
-#toggle:checked ~ #envelope-container #open-state {
-    opacity: 1; 
-    transform: translateY(0);
-}
-
-/* ------------------------------------- */
-/* ANIMAZIONI DI DISSOLVENZA SEQUENZIALE (Mantenute) */
-/* ------------------------------------- */
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#open-state > *,
-#open-state .buttons-circle-container > * {
-    opacity: 0;
-    transition: none; 
-}
-
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-1,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-2,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-3,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-4,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-5,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-6,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-7,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-8,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-9,
-#toggle:checked ~ #envelope-container #open-state .fade-in-delay-10 {
-    animation-name: fadeIn;
-    animation-duration: var(--animation-duration);
-    animation-fill-mode: forwards;
-}
-
-/* ORARI DI RITARDO */
-.fade-in-delay-1 { animation-delay: calc(var(--envelope-open-delay) + 0.1s); }
-.fade-in-delay-2 { animation-delay: calc(var(--envelope-open-delay) + 0.3s); }
-.fade-in-delay-3 { animation-delay: calc(var(--envelope-open-delay) + 0.5s); }
-.fade-in-delay-4 { animation-delay: calc(var(--envelope-open-delay) + 0.7s); }
-.fade-in-delay-5 { animation-delay: calc(var(--envelope-open-delay) + 0.9s); }
-.fade-in-delay-6 { animation-delay: calc(var(--envelope-open-delay) + 1.1s); }
-.fade-in-delay-7 { animation-delay: calc(var(--envelope-open-delay) + 1.3s); }
-.fade-in-delay-8 { animation-delay: calc(var(--envelope-open-delay) + 1.5s); }
-.fade-in-delay-9 { animation-delay: calc(var(--envelope-open-delay) + 1.7s); }
-.fade-in-delay-10 { animation-delay: calc(var(--envelope-open-delay) + 1.9s); }
-
-#toggle:checked ~ #envelope-container #open-state .decorations {
-    animation-name: fadeIn;
-    animation-duration: var(--animation-duration);
-    animation-fill-mode: forwards;
-    animation-delay: 0.1s; 
-}
-
-
-/* ------------------------------------- */
-/* STILI GENERALI E BOTTONI (Mantenuti) */
-/* ------------------------------------- */
-
-.small-text {
-    font-size: 0.9em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Playfair Display', serif;
-}
-
-.cursive-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: 5em;
-    font-weight: 400;
-    color: var(--black-text);
-    margin: 0;
-    line-height: 1.2;
-}
-/* ... (Altri stili non fondamentali per la visualizzazione busta rimangono invariati) ... */
-.date-time {
-    font-size: 1.1em;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.separator {
-    width: 60%;
-    height: 1px;
-    background-color: var(--gold);
-    margin: 20px auto;
-}
-
-.buttons-circle-container {
-    display: flex;
-    justify-content: space-around; 
-    align-items: flex-end;
-    margin: 30px auto 15px auto; 
-    max-width: 400px;
-}
-.location-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.circle-button {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    border: 2px solid var(--gold); 
-    color: var(--gold);
-    background-color: transparent;
-    transition: all 0.3s;
-    font-family: 'Playfair Display', serif;
-}
-
-.circle-button:hover {
-    background-color: var(--gold);
-    color: var(--paper-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.centered-action {
     text-align: center;
-    margin: 20px auto 30px auto;
-}
-.circle-button.large-confirm {
-    width: 100px; 
-    height: 100px; 
-    border-width: 3px; 
-    font-size: 1.1em;
+    position: relative; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    opacity: 1; 
 }
 
-.circle-button.whatsapp-confirm {
-    border-color: var(--boy-color); 
-    color: var(--boy-color);
-}
-.circle-button.whatsapp-confirm:hover {
-    background-color: var(--boy-color);
-    color: var(--paper-white);
-}
-
-.decorations {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px; 
-    flex-wrap: wrap;
-    opacity: 0; 
-}
-/* ... (Stili per sesso e countdown) ... */
-
-.buttons-container.social-buttons {
-    display: flex;
-    flex-direction: row; 
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    gap: 10px;
+/* ------------------------------------- */
+/* DECORAZIONI COMUNIONE (Rose e Croci) */
+/* ------------------------------------- */
+.decorations { 
+    font-size: 2.5em; 
+    margin-bottom: 10px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    flex-wrap: wrap; 
 }
 
-.social-buttons .action-button {
-    padding: 8px 12px;
-    font-size: 0.8em;
-    border-radius: 5px; 
-    border: 1px solid var(--social-color); 
-    color: var(--social-color);
-    background-color: transparent;
-    transition: background-color 0.3s, color 0.3s;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap; 
+/* Colore neutro per gli accenti religiosi */
+.cross {
+    color: var(--gold); 
 }
-.social-buttons .action-button:hover {
-    background-color: var(--social-color);
-    color: var(--paper-white);
+/* Colore rosa per le rose (o rosso, a seconda del tono) */
+.rose {
+    color: var(--accent-color); 
 }
 
-/* MEDIA QUERY (Mobile) */
 
+/* ------------------------------------- */
+/* STILI TESTO E PULSANTI */
+/* ------------------------------------- */
+
+.small-text { font-size: 0.9em; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+.cursive-name { font-family: 'Great Vibes', cursive; font-size: 5em; font-weight: 400; margin: 0; line-height: 1.2; }
+.date-time { font-size: 1.1em; margin-top: 20px; margin-bottom: 30px; letter-spacing: 1px; }
+.separator { width: 60%; height: 1px; background-color: var(--gold); margin: 20px auto; }
+
+/* Pulsanti di Posizione (Raggruppati) */
+.buttons-circle-container { display: flex; justify-content: space-around; align-items: flex-end; margin: 30px auto 15px auto; max-width: 400px; }
+.location-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.centered-action { text-align: center; margin: 20px auto 30px auto; }
+
+/* Stili dei Cerchi */
+.circle-button { text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--gold); color: var(--gold); background-color: transparent; transition: all 0.3s; }
+.circle-button:hover { background-color: var(--gold); color: var(--paper-white); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+.circle-button.large-confirm { width: 100px; height: 100px; border-width: 3px; font-size: 1.1em; }
+
+/* Stile speciale per la Conferma (usiamo l'accent-color) */
+.circle-button.whatsapp-confirm { border-color: var(--accent-color); color: var(--accent-color); }
+.circle-button.whatsapp-confirm:hover { background-color: var(--accent-color); color: var(--paper-white); }
+
+
+/* Pulsanti Social */
+.buttons-container.social-buttons { display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin-top: 10px; gap: 10px; }
+.social-buttons .action-button { padding: 8px 12px; font-size: 0.8em; border-radius: 5px; border: 1px solid var(--social-color); color: var(--social-color); background-color: transparent; transition: background-color 0.3s, color 0.3s; text-decoration: none; display: inline-block; white-space: nowrap; }
+.social-buttons .action-button:hover { background-color: var(--social-color); color: var(--paper-white); }
+
+
+/* Media Query (Mobile) */
 @media (max-width: 600px) {
-    body {
-        align-items: flex-start;
-    }
-    #closed-state, #open-state {
-        min-height: 500px; 
-        height: auto; 
-    }
-    #closed-state {
-        /* CRUCIALE: Ripristina l'altezza fissa su mobile per la chiusura */
-        height: 500px;
-    }
-    #open-state {
-        padding: 30px 15px; 
-    }
-    /* ... (Altri stili mobile) ... */
+    #open-state { padding: 30px 15px; }
+    .cursive-name { font-size: 4em; }
+    .circle-button { width: 70px; height: 70px; }
+    .circle-button.large-confirm { width: 90px; height: 90px; }
 }
