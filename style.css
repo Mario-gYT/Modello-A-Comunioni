@@ -1,12 +1,12 @@
 /* Importazione Font Google */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900;1,700&family=Great+Vibes&display=swap');
 
-/* Variabili Colori (Adattate per un tono più neutro/elegante se necessario) */
+/* Variabili Colori */
 :root {
     --gold: #A68E5D; 
     --black-text: #222222; 
     --paper-white: #FDFDFD; 
-    --accent-color: #9b59b6; /* Un viola/rosa tenue per l'accento */
+    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione */
     --social-color: #6c757d; 
 }
 
@@ -47,61 +47,151 @@ body {
 }
 
 /* ------------------------------------- */
-/* DECORAZIONI COMUNIONE (Rose e Croci) */
+/* CORNICE DI ROSE E NOME */
+/* ------------------------------------- */
+.name-frame-container {
+    margin: 20px auto 10px auto;
+    /* Usa un layout per forzare il nome ad essere circondato, anche se la cornice è solo testo */
+}
+
+.rose-border {
+    font-size: 0.9em;
+    color: var(--accent-color); /* Colore delle rose */
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.main-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5.5em; /* Leggermente più grande per riempire lo spazio */
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* ------------------------------------- */
+/* DECORAZIONI COMUNIONE */
 /* ------------------------------------- */
 .decorations { 
     font-size: 2.5em; 
-    margin-bottom: 10px; 
+    margin-bottom: 20px; 
     display: flex; 
     justify-content: center; 
     gap: 15px; 
     flex-wrap: wrap; 
 }
 
-/* Colore neutro per gli accenti religiosi */
-.cross {
-    color: var(--gold); 
-}
-/* Colore rosa per le rose (o rosso, a seconda del tono) */
-.rose {
-    color: var(--accent-color); 
-}
+.cross { color: var(--gold); }
+.rose { color: var(--accent-color); }
 
 
 /* ------------------------------------- */
-/* STILI TESTO E PULSANTI */
+/* PULSANTI A BLOCCO (QUADRATI/RETTANGOLI) */
 /* ------------------------------------- */
 
-.small-text { font-size: 0.9em; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
-.cursive-name { font-family: 'Great Vibes', cursive; font-size: 5em; font-weight: 400; margin: 0; line-height: 1.2; }
-.date-time { font-size: 1.1em; margin-top: 20px; margin-bottom: 30px; letter-spacing: 1px; }
+.buttons-block-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spazio tra i pulsanti */
+}
+
+.location-header {
+    margin: 15px 0 5px 0; /* Spazio sopra l'intestazione della posizione */
+    font-weight: 600;
+}
+
+.action-button.block-button {
+    /* Stile base del pulsante rettangolare */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px; /* Angoli leggermente arrotondati */
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Stile per i pulsanti di Mappa */
+.primary-button {
+    border: 2px solid var(--gold);
+    background-color: transparent;
+    color: var(--gold);
+}
+.primary-button:hover {
+    background-color: var(--gold);
+    color: var(--paper-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per il pulsante CONFERMA (In evidenza) */
+.confirm-button {
+    border: 2px solid var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--paper-white);
+    padding: 15px 20px; /* Più grande */
+    font-size: 1.1em;
+}
+.confirm-button:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* Pulsanti Social (mantenuti a riga singola) */
+.buttons-container.social-buttons { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    margin-top: 10px; 
+    gap: 10px; 
+}
+.social-buttons .action-button {
+    padding: 8px 12px;
+    font-size: 0.8em;
+    border-radius: 5px; 
+    border: 1px solid var(--social-color); 
+    color: var(--social-color);
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap; 
+}
+.social-buttons .action-button:hover {
+    background-color: var(--social-color);
+    color: var(--paper-white);
+}
+
+/* ------------------------------------- */
+/* ALTRI STILI E MEDIA QUERY */
+/* ------------------------------------- */
+
+.small-text { font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; }
+.date-time { font-size: 1.1em; margin-top: 20px; margin-bottom: 20px; letter-spacing: 1px; }
 .separator { width: 60%; height: 1px; background-color: var(--gold); margin: 20px auto; }
-
-/* Pulsanti di Posizione (Raggruppati) */
-.buttons-circle-container { display: flex; justify-content: space-around; align-items: flex-end; margin: 30px auto 15px auto; max-width: 400px; }
-.location-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.centered-action { text-align: center; margin: 20px auto 30px auto; }
-
-/* Stili dei Cerchi */
-.circle-button { text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--gold); color: var(--gold); background-color: transparent; transition: all 0.3s; }
-.circle-button:hover { background-color: var(--gold); color: var(--paper-white); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-.circle-button.large-confirm { width: 100px; height: 100px; border-width: 3px; font-size: 1.1em; }
-
-/* Stile speciale per la Conferma (usiamo l'accent-color) */
-.circle-button.whatsapp-confirm { border-color: var(--accent-color); color: var(--accent-color); }
-.circle-button.whatsapp-confirm:hover { background-color: var(--accent-color); color: var(--paper-white); }
+.centered-action { text-align: center; }
 
 
-/* Pulsanti Social */
-.buttons-container.social-buttons { display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin-top: 10px; gap: 10px; }
-.social-buttons .action-button { padding: 8px 12px; font-size: 0.8em; border-radius: 5px; border: 1px solid var(--social-color); color: var(--social-color); background-color: transparent; transition: background-color 0.3s, color 0.3s; text-decoration: none; display: inline-block; white-space: nowrap; }
-.social-buttons .action-button:hover { background-color: var(--social-color); color: var(--paper-white); }
-
-
-/* Media Query (Mobile) */
 @media (max-width: 600px) {
     #open-state { padding: 30px 15px; }
-    .cursive-name { font-size: 4em; }
-    .circle-button { width: 70px; height: 70px; }
-    .circle-button.large-confirm { width: 90px; height: 90px; }
+    .main-title { font-size: 4.5em; }
+    .rose-border { font-size: 0.8em; }
+    .action-button.block-button { padding: 10px 15px; font-size: 0.9em; }
+    .confirm-button { padding: 13px 18px; font-size: 1em; }
 }
