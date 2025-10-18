@@ -1,23 +1,24 @@
 /* Importazione Font Google */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900;1,700&family=Great+Vibes&display=swap');
 
-/* Variabili Colori */
+/* Variabili Colori (Adattate per Comunione) */
 :root {
-    --gold: #A68E5D; 
+    --gold: #A68E5D; /* Oro elegante */
     --black-text: #222222; 
     --paper-white: #FDFDFD; 
-    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione */
+    --accent-color: #9b59b6; /* Viola/Rosa per l'accento Comunione (per le rose/conferma) */
     --social-color: #6c757d; 
 }
 
-/* Stile base */
+/* Stile base (Centraggio e Sfondo) */
 body {
     background-color: #000; 
     color: #333; 
     font-family: 'Playfair Display', serif; 
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    /* align-items: flex-start; permette lo scroll se l'invito è lungo */
+    align-items: center; 
     min-height: 100vh;
     margin: 0;
     padding: 20px;
@@ -28,30 +29,29 @@ body {
 .gold-text { color: var(--gold); }
 .black-text { color: var(--black-text); }
 
-
 /* ------------------------------------- */
-/* CONTENITORE PRINCIPALE (#open-state) */
+/* CONTENITORE UNICO (Apertura Immediata) */
 /* ------------------------------------- */
 
 #open-state {
     width: 90%;
     max-width: 500px;
     background-color: var(--paper-white); 
-    border: 3px solid var(--gold); 
+    border: 3px solid var(--gold); /* Bordo robusto e dorato */
     border-radius: 5px; 
     padding: 40px;
     text-align: center;
     position: relative; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-    opacity: 1; 
+    /* Tutte le regole di nascondimento/transizione sono state rimosse */
+    opacity: 1;
 }
 
 /* ------------------------------------- */
-/* CORNICE DI ROSE E NOME */
+/* CORNICE DI ROSE E NOME (NUOVA STRUTTURA) */
 /* ------------------------------------- */
 .name-frame-container {
     margin: 20px auto 10px auto;
-    /* Usa un layout per forzare il nome ad essere circondato, anche se la cornice è solo testo */
 }
 
 .rose-border {
@@ -65,10 +65,11 @@ body {
 
 .main-title {
     font-family: 'Great Vibes', cursive;
-    font-size: 5.5em; /* Leggermente più grande per riempire lo spazio */
+    font-size: 5.5em; 
     font-weight: 400;
     margin: 0;
     line-height: 1.2;
+    color: var(--black-text);
 }
 
 /* ------------------------------------- */
@@ -88,6 +89,34 @@ body {
 
 
 /* ------------------------------------- */
+/* STILI GENERALI E TESTO */
+/* ------------------------------------- */
+
+.small-text { 
+    font-size: 0.9em; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 5px; 
+}
+
+.date-time { 
+    font-size: 1.1em; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    letter-spacing: 1px; 
+    color: var(--gold); /* Colore dorato per data/ora */
+}
+
+.separator { 
+    width: 60%; 
+    height: 1px; 
+    background-color: var(--gold); 
+    margin: 20px auto; 
+}
+.centered-action { text-align: center; }
+
+
+/* ------------------------------------- */
 /* PULSANTI A BLOCCO (QUADRATI/RETTANGOLI) */
 /* ------------------------------------- */
 
@@ -99,12 +128,14 @@ body {
 }
 
 .location-header {
-    margin: 15px 0 5px 0; /* Spazio sopra l'intestazione della posizione */
+    margin: 15px 0 5px 0; 
     font-weight: 600;
+    color: var(--gold); /* Intestazione dorata */
+    text-transform: uppercase;
+    font-size: 0.9em;
 }
 
 .action-button.block-button {
-    /* Stile base del pulsante rettangolare */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,7 +150,7 @@ body {
     font-family: 'Playfair Display', serif;
 }
 
-/* Stile per i pulsanti di Mappa */
+/* Stile per i pulsanti di Mappa (Chiesa/Ristorante) */
 .primary-button {
     border: 2px solid var(--gold);
     background-color: transparent;
@@ -153,7 +184,10 @@ body {
     font-size: 1.2em;
 }
 
-/* Pulsanti Social (mantenuti a riga singola) */
+/* ------------------------------------- */
+/* PULSANTI SOCIAL (Mantenuti a riga) */
+/* ------------------------------------- */
+
 .buttons-container.social-buttons { 
     display: flex; 
     flex-direction: row; 
@@ -179,14 +213,8 @@ body {
 }
 
 /* ------------------------------------- */
-/* ALTRI STILI E MEDIA QUERY */
+/* MEDIA QUERY */
 /* ------------------------------------- */
-
-.small-text { font-size: 0.9em; text-transform: uppercase; letter-spacing: 2px; }
-.date-time { font-size: 1.1em; margin-top: 20px; margin-bottom: 20px; letter-spacing: 1px; }
-.separator { width: 60%; height: 1px; background-color: var(--gold); margin: 20px auto; }
-.centered-action { text-align: center; }
-
 
 @media (max-width: 600px) {
     #open-state { padding: 30px 15px; }
