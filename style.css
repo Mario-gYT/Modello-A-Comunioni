@@ -35,6 +35,19 @@ body {
     color: var(--black-text);
 }
 
+/* Contenitore Busta/Invito (Modello Purity) */
+#envelope-container {
+    width: 90%;
+    max-width: 500px;
+    min-height: 400px;
+    background-color: var(--paper-white); 
+    border: 1px solid var(--gold); 
+    border-radius: 5px; 
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    transition: all 0.7s ease-in-out;
+}
 
 /* Nasconde il checkbox */
 #toggle {
@@ -44,7 +57,38 @@ body {
 /* ------------------------------------- */
 /* STATO CHIUSO (Busta Iniziale) */
 /* ------------------------------------- */
+#closed-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+}
 
+#closed-state h1 {
+    color: var(--black-text);
+    font-weight: 500;
+}
+
+/* Stile del pulsante "Apri invito" */
+.gold-button {
+    background-color: var(--gold);
+    color: var(--paper-white);
+    border: 1px solid var(--gold);
+    padding: 12px 30px;
+    border-radius: 5px; 
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+}
+
+.gold-button:hover {
+    background-color: var(--black-text);
+    color: var(--gold);
+    transform: none; 
 }
 
 /* ------------------------------------- */
